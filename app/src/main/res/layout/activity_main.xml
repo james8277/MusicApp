@@ -20,8 +20,8 @@
 
     <Button
         android:id="@+id/Button_1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Button_2"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,30 +31,30 @@
 
     <Button
         android:id="@+id/Button_2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="140dp"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="120dp"/>
 
     <Button
         android:id="@+id/Button_3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="140dp"
-        android:layout_marginBottom="80dp" />
+        android:layout_marginBottom="120dp" />
 
     <Button
         android:id="@+id/Button_4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Button_3"
