@@ -35,27 +35,27 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction mf = getFragmentManager().beginTransaction();
         Fragment fragment_start = new MainFragment();
-        mf.replace(R.id.container_main,fragment_start).addToBackStack("main");
+        mf.replace(R.id.container_main,fragment_start);
         mf.commit();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            Log.d(TAG, "onKeyDown: BACK");
-            if(getFragmentManager().getBackStackEntryCount() > 0)
-            {
-                Log.d(TAG, "Fragment Count > 0");
-                getFragmentManager().popBackStack();
-            }
-            else
-            {
-                return super.onKeyDown(keyCode,event);
-            }
-        }
-
-        return false;
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//
+//        if(keyCode == KeyEvent.KEYCODE_BACK)
+//        {
+//            Log.d(TAG, "onKeyDown: BACK");
+//            if(getFragmentManager().getBackStackEntryCount() > 0)
+//            {
+//                Log.d(TAG, "Fragment Count > 0");
+//                getFragmentManager().popBackStack();
+//            }
+//            else
+//            {
+//                return super.onKeyDown(keyCode,event);
+//            }
+//        }
+//
+//        return false;
+//    }
 }

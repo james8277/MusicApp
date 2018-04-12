@@ -28,7 +28,18 @@ public class MainFragment extends android.app.Fragment {
     private Button Button_metronome;
     private Button button_training;
     private EditText editText_rate;
+
+    private SoundPool soundPool_main;
+
+    private int soundID_1;
+    private int soundID_metronome;
+    private int soundID_2;
+    private int soundID_3 ;
+    private int soundID_4;
+    private int soundID_5;
+
     private long metronome_rate;
+
 
     private Runnable runnable_metronome;
 
@@ -38,6 +49,14 @@ public class MainFragment extends android.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        soundPool_main = new SoundPool.Builder().setMaxStreams(10).build();
+        soundID_1 = soundPool_main.load(getActivity(),R.raw.hihat_1,1);
+        soundID_metronome = soundPool_main.load(getActivity(),R.raw.metronome,1);
+        soundID_2 = soundPool_main.load(getActivity(),R.raw.drum_2,1);
+        soundID_3 = soundPool_main.load(getActivity(),R.raw.drum_1,1);
+        soundID_4 = soundPool_main.load(getActivity(),R.raw.bass_drum,1);
+        soundID_5 = soundPool_main.load(getActivity(),R.raw.hihat_2,1);
 
     }
 
@@ -56,23 +75,25 @@ public class MainFragment extends android.app.Fragment {
         button_training = (Button)view.findViewById(R.id.Button_training_mode);
         editText_rate = (EditText)view.findViewById(R.id.EditText_metronome_tempo);
 
+
+        Button_metronome = (Button)view.findViewById(R.id.Button_metronome);
+
 //        AudioAttributes test =
 //                new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).setUsage(AudioAttributes.USAGE_GAME).build();
 
-        final SoundPool soundPool_main = new SoundPool.Builder().setMaxStreams(10).build();
 
-        final int soundID_1 = soundPool_main.load(getActivity(),R.raw.hihat_1,1);
-        final int soundID_metronome = soundPool_main.load(getActivity(),R.raw.hihat_3,1);
-        final int soundID_2 = soundPool_main.load(getActivity(),R.raw.drum_1,1);
-        final int soundID_3 = soundPool_main.load(getActivity(),R.raw.drum_2,1);
-        final int soundID_4 = soundPool_main.load(getActivity(),R.raw.bassdrum_1,1);
-        final int soundID_5 = soundPool_main.load(getActivity(),R.raw.hihat_2,1);
 
         final Handler handler_delay = new Handler();
 
+        runnable_metronome = new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG, "run: time\t" + System.currentTimeMillis());
+                soundPool_main.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
+                handler_delay.postDelayed(this,988*60/metronome_rate);
+            }
+        };
 
-
-        Button_metronome = (Button)view.findViewById(R.id.Button_metronome);
         Button_metronome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,14 +114,6 @@ public class MainFragment extends android.app.Fragment {
                         Log.d(TAG, "onClick: set_rate");
                         metronome_rate = Long.parseLong(value_metronome);
                     }
-
-                    runnable_metronome = new Runnable() {
-                        @Override
-                        public void run() {
-                            soundPool_main.play(soundID_metronome,(float)0.4,(float)0.4,1,0,1);
-                            handler_delay.postDelayed(this,1000*60/metronome_rate);
-                        }
-                    };
                     handler_delay.post(runnable_metronome);
                 }
                 else
@@ -113,13 +126,11 @@ public class MainFragment extends android.app.Fragment {
             }
         });
 
-
-
         button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Button1");
-                soundPool_main.play(soundID_1,1,1,1,0,1);
+                soundPool_main.play(soundID_1,(float)0.5,(float)0.5,1,0,1);
 
             }
         });
@@ -165,6 +176,14 @@ public class MainFragment extends android.app.Fragment {
 
     }
 
+
+    @Override
+    public void onPause() {
+
+        soundPool_main.release();
+
+        super.onPause();
+    }
 
 
 }
