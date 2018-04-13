@@ -17,6 +17,9 @@ import android.widget.EditText;
 import com.example.james.musicapp.MainActivity;
 import com.example.james.musicapp.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainFragment extends android.app.Fragment {
 
     private static final String TAG = "MainFragment";
@@ -37,6 +40,9 @@ public class MainFragment extends android.app.Fragment {
     private int soundID_3 ;
     private int soundID_4;
     private int soundID_5;
+
+    private Timer timer_test = null;
+    private TimerTask timerTask_test;
 
     private long metronome_rate;
 
@@ -84,13 +90,13 @@ public class MainFragment extends android.app.Fragment {
 
 
         final Handler handler_delay = new Handler();
-
         runnable_metronome = new Runnable() {
             @Override
             public void run() {
                 Log.e(TAG, "run: time\t" + System.currentTimeMillis());
                 soundPool_main.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
                 handler_delay.postDelayed(this,988*60/metronome_rate);
+
             }
         };
 
@@ -114,13 +120,29 @@ public class MainFragment extends android.app.Fragment {
                         Log.d(TAG, "onClick: set_rate");
                         metronome_rate = Long.parseLong(value_metronome);
                     }
-                    handler_delay.post(runnable_metronome);
+
+
+                    timer_test = new Timer();
+                    timerTask_test = new TimerTask() {
+                        @Override
+                        public void run() {
+                            Log.e(TAG, "run: timer\t" + System.currentTimeMillis() );
+                            soundPool_main.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
+                        }
+                    };
+
+                    timer_test.schedule(timerTask_test,0,1000*60/metronome_rate);
+//                    handler_delay.post(runnable_metronome);
+
                 }
                 else
                 {
                     Button_metronome.setText(R.string.metronome);
                     Log.d(TAG, "onClick: stop");
-                    handler_delay.removeCallbacks(runnable_metronome);
+//                    handler_delay.removeCallbacks(runnable_metronome);
+                    timer_test.purge();
+                    timer_test.cancel();
+
                 }
                 isMetronome = !isMetronome;
             }
