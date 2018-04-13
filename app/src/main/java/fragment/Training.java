@@ -73,74 +73,81 @@ public class Training extends android.app.Fragment {
          return new TimerTask() {
             @Override
             public void run() {
-                if(drum_track[count%4][0] == 1)
+                if(count >= 0)
                 {
+                    if(drum_track[count%4][0] == 1)
+                    {
 
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            button_1.performClick();
-                            handler_test.postDelayed(new Runnable() {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                button_1.performClick();
+                                handler_test.postDelayed(new Runnable() {
 
-                                @Override
-                                public void run() {
+                                    @Override
+                                    public void run() {
 //                                Log.d(TAG, "run: press = false");
-                                    button_1.setPressed(false);
-                                }
-                            }, 100);
-                        }
-                    });
+                                        button_1.setPressed(false);
+                                    }
+                                }, 100);
+                            }
+                        });
+                    }
+                    if(drum_track[count%4][1] == 1)
+                    {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                button_2.performClick();
+                                handler_test.postDelayed(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+//                                Log.d(TAG, "run: press = false");
+                                        button_2.setPressed(false);
+                                    }
+                                }, 100);
+                            }
+                        });
+                    }
+                    if(drum_track[count%4][2] == 1)
+                    {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                button_3.performClick();
+                                handler_test.postDelayed(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+//                                Log.d(TAG, "run: press = false");
+                                        button_3.setPressed(false);
+                                    }
+                                }, 100);
+                            }
+                        });
+                    }
+                    if(drum_track[count%4][3] == 1)
+                    {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                button_4.performClick();
+                                handler_test.postDelayed(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+//                                Log.d(TAG, "run: press = false");
+                                        button_4.setPressed(false);
+                                    }
+                                }, 100);
+                            }
+                        });
+                    }
                 }
-                if(drum_track[count%4][1] == 1)
+                else
                 {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            button_2.performClick();
-                            handler_test.postDelayed(new Runnable() {
-
-                                @Override
-                                public void run() {
-//                                Log.d(TAG, "run: press = false");
-                                    button_2.setPressed(false);
-                                }
-                            }, 100);
-                        }
-                    });
-                }
-                if(drum_track[count%4][2] == 1)
-                {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            button_3.performClick();
-                            handler_test.postDelayed(new Runnable() {
-
-                                @Override
-                                public void run() {
-//                                Log.d(TAG, "run: press = false");
-                                    button_3.setPressed(false);
-                                }
-                            }, 100);
-                        }
-                    });
-                }
-                if(drum_track[count%4][3] == 1)
-                {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            button_4.performClick();
-                            handler_test.postDelayed(new Runnable() {
-
-                                @Override
-                                public void run() {
-//                                Log.d(TAG, "run: press = false");
-                                    button_4.setPressed(false);
-                                }
-                            }, 100);
-                        }
-                    });
+                    soundPool_training.play(soundID_5,(float)0.1,(float)0.1,1,0,1);
                 }
                 count++;
                 Log.e(TAG, "\t" + System.currentTimeMillis());
@@ -231,10 +238,20 @@ public class Training extends android.app.Fragment {
         handler_example = new Handler();
         handler_countdown = new Handler();
 
-        mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.basic_drum_track_1);
+        mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.basic_drum_track_1_space);
         mediaPlayer_track = MediaPlayer.create(getActivity(),R.raw.basic_drum_track_1_space);
 
+        soundPool_training = new SoundPool.Builder().setMaxStreams(32).build();
+        soundID_test = soundPool_training.load(getActivity(),R.raw.test,1);
+        soundID_1 = soundPool_training.load(getActivity(),R.raw.hihat_1,1);
+        soundID_2 = soundPool_training.load(getActivity(),R.raw.drum_2,1);
+        soundID_3 = soundPool_training.load(getActivity(),R.raw.drum_1,1);
+        soundID_4 = soundPool_training.load(getActivity(),R.raw.bass_drum,1);
+        soundID_5 = soundPool_training.load(getActivity(),R.raw.metronome,1);
+        count = -8;
+
         handler_test = new Handler();
+
 
 
         drum_track = new int[4][4];
@@ -263,15 +280,6 @@ public class Training extends android.app.Fragment {
 
         view_test = inflater.inflate(R.layout.fragment_training, container, false);
 
-        soundPool_training = new SoundPool.Builder().setMaxStreams(32).build();
-
-        soundID_test = soundPool_training.load(getActivity(),R.raw.test,1);
-        soundID_1 = soundPool_training.load(getActivity(),R.raw.hihat_1,1);
-        soundID_2 = soundPool_training.load(getActivity(),R.raw.drum_2,1);
-        soundID_3 = soundPool_training.load(getActivity(),R.raw.drum_1,1);
-        soundID_4 = soundPool_training.load(getActivity(),R.raw.bass_drum,1);
-        soundID_5 = soundPool_training.load(getActivity(),R.raw.metronome,1);
-
         button_1 = (Button)view_test.findViewById(R.id.Button_1_training);
         button_2 = (Button)view_test.findViewById(R.id.Button_2_training);
         button_3 = (Button)view_test.findViewById(R.id.Button_3_training);
@@ -281,10 +289,6 @@ public class Training extends android.app.Fragment {
         button_back = (Button)view_test.findViewById(R.id.Button_back__training);
         button_practice = (Button)view_test.findViewById(R.id.Button_practice);
 
-
-        timerTask_countdown = newTimerCountDown();
-
-        count = 0;
 
         return view_test;
     }
@@ -303,20 +307,21 @@ public class Training extends android.app.Fragment {
     public void onResume() {
 
         count_down = 7;
-        runnable_countdown = new Runnable() {
-            @Override
-            public void run() {
-                if(count_down >= 0)
-                {
-                    Toast.makeText(getActivity(),Integer.toString(count_down),Toast.LENGTH_SHORT).show();
-                    count_down--;
-                }
-                handler_countdown.postDelayed(this,500);
-            }
-        };
+//        runnable_countdown = new Runnable() {
+//            @Override
+//            public void run() {
+//                if(count_down >= 0)
+//                {
+//                    Toast.makeText(getActivity(),Integer.toString(count_down),Toast.LENGTH_SHORT).show();
+//                    count_down--;
+//                }
+//                handler_countdown.postDelayed(this,500);
+//            }
+//        };
 
         mediaPlayer_track.setVolume(1,1);
 
+        timerTask_countdown = newTimerCountDown();
         button_practice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -436,6 +441,7 @@ public class Training extends android.app.Fragment {
                             button_example.setText(R.string.button_example);
                             timer_training.cancel();
                             timer_training.purge();
+                            count = -8;
                         }
                     });
 
@@ -447,7 +453,7 @@ public class Training extends android.app.Fragment {
                 else
                 {
                     Log.d(TAG, "onClick: stop");
-                    count = 0;
+                    count = -8;
                     mediaPlayer_example.stop();
                     mediaPlayer_example.prepareAsync();
 //                    handler_example.removeCallbacks(runnable_test);
@@ -483,7 +489,9 @@ public class Training extends android.app.Fragment {
             mediaPlayer_example.stop();
             mediaPlayer_example.prepareAsync();
         }
-        handler_countdown.removeCallbacks(runnable_countdown);
+//        handler_countdown.removeCallbacks(runnable_countdown);
+
+
 
         if(mediaPlayer_track.isPlaying())
         {
