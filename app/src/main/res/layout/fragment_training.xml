@@ -31,51 +31,45 @@
 
     <Button
         android:id="@+id/Button_1_training"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/round_shape_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Button_2_training"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_2_training"
-        android:layout_marginBottom="50dp"
-        android:layout_marginStart="50dp"
-        android:background="@drawable/color_change_effect"/>
+        app:layout_constraintTop_toBottomOf="@+id/Button_2_training" />
 
     <Button
         android:id="@+id/Button_2_training"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/round_shape_button"
+        app:layout_constraintEnd_toStartOf="@+id/Button_3_training"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/color_change_effect"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button_3_training"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/round_shape_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="140dp"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/color_change_effect" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button_4_training"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Button_3_training"
-        app:layout_constraintTop_toBottomOf="@+id/Button_3_training"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/color_change_effect" />
+        android:background="@drawable/round_shape_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Button_3_training"
+        app:layout_constraintTop_toBottomOf="@+id/Button_3_training" />
 
     <Button
         android:id="@+id/Button_back__training"

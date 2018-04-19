@@ -31,47 +31,45 @@
 
     <Button
         android:id="@+id/Button_1"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/round_shape_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Button_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_2"
-        android:layout_marginBottom="50dp"
-        android:layout_marginStart="50dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/Button_2" />
 
     <Button
         android:id="@+id/Button_2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/round_shape_button"
+        app:layout_constraintEnd_toStartOf="@+id/Button_3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="120dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button_3"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/round_shape_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="140dp"
-        android:layout_marginBottom="120dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button_4"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Button_3"
-        app:layout_constraintTop_toBottomOf="@+id/Button_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="50dp"
-        android:layout_marginEnd="50dp" />
+        android:background="@drawable/round_shape_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Button_3"
+        app:layout_constraintTop_toBottomOf="@+id/Button_3" />
 
     <Button
         android:id="@+id/Button_training_mode"
@@ -82,5 +80,15 @@
         android:layout_marginEnd="15dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/Button_record_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Button_training_mode"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/record_mode"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -25,12 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private DataBase dataBase;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dataBase = new DataBase(this,"Database Record",null, 1);
 
 
         FragmentTransaction mf = getFragmentManager().beginTransaction();

@@ -11,4 +11,18 @@
     <string name="set_rate">Enter Rate</string>
     <string name="stop">Stop</string>
     <string name="button_practice">Practice</string>
+    <string name="record">Record</string>
+    <string name="record_mode">Record Mode</string>
+    <string name="replay">Replay</string>
+    <string name="recording">Recording</string>
+    <string name="save">Save</string>
+    <string name="Data">Data</string>
+    <string name="record_name">Record Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter">Enter</string>
+    <string name="delete">Delete</string>
+    <string name="alert">Delete all record track?</string>
+    <string name="yes">Yes</string>
+    <string name="chooseTrack">Choose a Track</string>
+    <string name="save_check">Do you wnat to save the track?</string>
 </resources>

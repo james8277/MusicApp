@@ -30,6 +30,8 @@ public class MainFragment extends android.app.Fragment {
     private Button button_4;
     private Button Button_metronome;
     private Button button_training;
+    private Button button_record;
+
     private EditText editText_rate;
 
     private SoundPool soundPool_main;
@@ -79,10 +81,11 @@ public class MainFragment extends android.app.Fragment {
         button_3 = (Button)view.findViewById(R.id.Button_3);
         button_4 = (Button)view.findViewById(R.id.Button_4);
         button_training = (Button)view.findViewById(R.id.Button_training_mode);
+        button_record = (Button)view.findViewById(R.id.Button_record_mode);
+        Button_metronome = (Button)view.findViewById(R.id.Button_metronome);
+
         editText_rate = (EditText)view.findViewById(R.id.EditText_metronome_tempo);
 
-
-        Button_metronome = (Button)view.findViewById(R.id.Button_metronome);
 
 //        AudioAttributes test =
 //                new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).setUsage(AudioAttributes.USAGE_GAME).build();
@@ -194,6 +197,18 @@ public class MainFragment extends android.app.Fragment {
                 mf.commit();
             }
         });
+        button_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: record");
+                FragmentTransaction mf = getFragmentManager().beginTransaction();
+                android.app.Fragment fragment_record = new Record();
+                mf.replace(R.id.container_main,fragment_record);
+                mf.commit();
+            }
+        });
+
+
         return view;
 
     }

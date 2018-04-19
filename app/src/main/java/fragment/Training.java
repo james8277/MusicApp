@@ -60,7 +60,7 @@ public class Training extends android.app.Fragment {
     private TimerTask timerTask_countdown;
 
     private Toast toast_countdown;
-    View view_test;
+    View view_training;
 
     int streamPlay;
     private boolean isPlay = false;
@@ -237,6 +237,7 @@ public class Training extends android.app.Fragment {
 
         handler_example = new Handler();
         handler_countdown = new Handler();
+        handler_test = new Handler();
 
         mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.basic_drum_track_1_space);
         mediaPlayer_track = MediaPlayer.create(getActivity(),R.raw.basic_drum_track_1_space);
@@ -248,13 +249,14 @@ public class Training extends android.app.Fragment {
         soundID_3 = soundPool_training.load(getActivity(),R.raw.drum_1,1);
         soundID_4 = soundPool_training.load(getActivity(),R.raw.bass_drum,1);
         soundID_5 = soundPool_training.load(getActivity(),R.raw.metronome,1);
+
+
         count = -8;
 
-        handler_test = new Handler();
 
 
 
-        drum_track = new int[4][4];
+        drum_track = new int[4][5];
 
         for(int i=0;i<4;i++)
         {
@@ -262,6 +264,7 @@ public class Training extends android.app.Fragment {
             {
                 drum_track[i][j] = 0;
             }
+            drum_track[i][4] = 240;
         }
         drum_track[0][0] = 1;
         drum_track[1][0] = 1;
@@ -278,19 +281,19 @@ public class Training extends android.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        view_test = inflater.inflate(R.layout.fragment_training, container, false);
+        view_training = inflater.inflate(R.layout.fragment_training, container, false);
 
-        button_1 = (Button)view_test.findViewById(R.id.Button_1_training);
-        button_2 = (Button)view_test.findViewById(R.id.Button_2_training);
-        button_3 = (Button)view_test.findViewById(R.id.Button_3_training);
-        button_4 = (Button)view_test.findViewById(R.id.Button_4_training);
+        button_1 = (Button)view_training.findViewById(R.id.Button_1_training);
+        button_2 = (Button)view_training.findViewById(R.id.Button_2_training);
+        button_3 = (Button)view_training.findViewById(R.id.Button_3_training);
+        button_4 = (Button)view_training.findViewById(R.id.Button_4_training);
 
-        button_example = (Button)view_test.findViewById(R.id.Button_example);
-        button_back = (Button)view_test.findViewById(R.id.Button_back__training);
-        button_practice = (Button)view_test.findViewById(R.id.Button_practice);
+        button_example = (Button)view_training.findViewById(R.id.Button_example);
+        button_back = (Button)view_training.findViewById(R.id.Button_back__training);
+        button_practice = (Button)view_training.findViewById(R.id.Button_practice);
 
 
-        return view_test;
+        return view_training;
     }
 
 
@@ -448,7 +451,6 @@ public class Training extends android.app.Fragment {
                     timer_training = new Timer();
                     timerTask_training = newTimerTask();
                     timer_training.schedule(timerTask_training,0,1000*60/120);
-
                 }
                 else
                 {
