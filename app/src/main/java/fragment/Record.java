@@ -47,7 +47,8 @@ public class Record extends android.app.Fragment {
     private Button button_data;
     private Button button_delete;
 
-    private SoundPool soundPool_record;
+    private SoundPool soundPool_record_1;
+//    private SoundPool soundPool_record_2;
     private int soundID_test;
     private int soundID_1;
     private int soundID_2;
@@ -85,13 +86,16 @@ public class Record extends android.app.Fragment {
 
         handler_replay = new Handler();
 
-        soundPool_record = new SoundPool.Builder().setMaxStreams(32).build();
-        soundID_test = soundPool_record.load(getActivity(),R.raw.test,1);
-        soundID_1 = soundPool_record.load(getActivity(),R.raw.hihat_1,1);
-        soundID_2 = soundPool_record.load(getActivity(),R.raw.drum_2,1);
-        soundID_3 = soundPool_record.load(getActivity(),R.raw.drum_1,1);
-        soundID_4 = soundPool_record.load(getActivity(),R.raw.bass_drum,1);
-        soundID_5 = soundPool_record.load(getActivity(),R.raw.metronome,1);
+        soundPool_record_1 = new SoundPool.Builder().setMaxStreams(32).build();
+        soundID_test = soundPool_record_1.load(getActivity(),R.raw.test,1);
+        soundID_1 = soundPool_record_1.load(getActivity(),R.raw.hihat_1,1);
+        soundID_2 = soundPool_record_1.load(getActivity(),R.raw.drum_2,1);
+
+
+//        soundPool_record_2 = new SoundPool.Builder().setMaxStreams(32).build();
+        soundID_3 = soundPool_record_1.load(getActivity(),R.raw.drum_1,1);
+        soundID_4 = soundPool_record_1.load(getActivity(),R.raw.bass_drum,1);
+        soundID_5 = soundPool_record_1.load(getActivity(),R.raw.metronome,1);
         arrayList_record_text = new ArrayList<Integer[]>();
 
         dataBaseHelper = new DataBase(getActivity(),"Database Record",null, 1);
@@ -122,9 +126,9 @@ public class Record extends android.app.Fragment {
         button_1_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soundPool_record.play(soundID_1,(float)0.5,(float)0.5,1,0,1);
+                soundPool_record_1.play(soundID_1,(float)0.5,(float)0.5,1,0,1);
                 button_1_record.setPressed(true);
-                soundPool_record.stop(soundID_1);
+                soundPool_record_1.stop(soundID_1);
                 if(isRecord)
                 {
                     Long temp_long = System.currentTimeMillis() - startTime;
@@ -139,9 +143,9 @@ public class Record extends android.app.Fragment {
         button_2_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soundPool_record.play(soundID_2,1,1,1,0,1);
+                soundPool_record_1.play(soundID_2,1,1,1,0,1);
                 button_2_record.setPressed(true);
-                soundPool_record.stop(soundID_2);
+                soundPool_record_1.stop(soundID_2);
                 if(isRecord)
                 {
                     Long temp_long = System.currentTimeMillis() - startTime;
@@ -156,9 +160,9 @@ public class Record extends android.app.Fragment {
         button_3_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soundPool_record.play(soundID_3,1,1,1,0,1);
+                soundPool_record_1.play(soundID_3,1,1,1,0,1);
                 button_3_record.setPressed(true);
-                soundPool_record.stop(soundID_3);
+                soundPool_record_1.stop(soundID_3);
                 if(isRecord)
                 {
                     Long temp_long = System.currentTimeMillis() - startTime;
@@ -173,9 +177,9 @@ public class Record extends android.app.Fragment {
         button_4_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soundPool_record.play(soundID_4,1,1,1,0,1);
+                soundPool_record_1.play(soundID_4,1,1,1,0,1);
                 button_4_record.setPressed(true);
-                soundPool_record.stop(soundID_4);
+                soundPool_record_1.stop(soundID_4);
                 if(isRecord)
                 {
                     Long temp_long = System.currentTimeMillis() - startTime;
@@ -385,7 +389,7 @@ public class Record extends android.app.Fragment {
                         temp[1][i] = arrayList_record_text.get(i)[1].toString();
                     }
 
-                    dataBaseHelper.addRecord(temp,"Record Track " + dataBaseHelper.getRecordNumber());
+                    dataBaseHelper.addRecord(temp,"Record Track " + dataBaseHelper.getRecordNumber_record());
                 }
 
             }
@@ -397,7 +401,7 @@ public class Record extends android.app.Fragment {
             public void onClick(View v) {
 //                Log.e(TAG, "onClick: Data");
 
-                if(dataBaseHelper.getRecordNumber() == 0)
+                if(dataBaseHelper.getRecordNumber_record() == 0)
                 {
                     Toast.makeText(getActivity(),"There are no data in the database",Toast.LENGTH_SHORT).show();
                 }
@@ -503,7 +507,7 @@ public class Record extends android.app.Fragment {
                                                 }
                                             };
                                         }
-
+                                        Log.e(TAG, "onClick: time = \t" + temp_data_time[i]);
                                         timer_replay.schedule(timerTask_replay, temp_data_time[i]);
                                     }
                                 }
@@ -540,4 +544,14 @@ public class Record extends android.app.Fragment {
 
         return view_record;
     }
+
+    @Override
+    public void onPause() {
+
+        soundPool_record_1.release();
+//        soundPool_record_2.release();
+
+        super.onPause();
+    }
+
 }

@@ -34,7 +34,8 @@ public class MainFragment extends android.app.Fragment {
 
     private EditText editText_rate;
 
-    private SoundPool soundPool_main;
+    private SoundPool soundPool_main_1;
+//    private SoundPool soundPool_main_2;
 
     private int soundID_1;
     private int soundID_metronome;
@@ -58,13 +59,15 @@ public class MainFragment extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        soundPool_main = new SoundPool.Builder().setMaxStreams(10).build();
-        soundID_1 = soundPool_main.load(getActivity(),R.raw.hihat_1,1);
-        soundID_metronome = soundPool_main.load(getActivity(),R.raw.metronome,1);
-        soundID_2 = soundPool_main.load(getActivity(),R.raw.drum_2,1);
-        soundID_3 = soundPool_main.load(getActivity(),R.raw.drum_1,1);
-        soundID_4 = soundPool_main.load(getActivity(),R.raw.bass_drum,1);
-        soundID_5 = soundPool_main.load(getActivity(),R.raw.hihat_2,1);
+        soundPool_main_1 = new SoundPool.Builder().setMaxStreams(32).build();
+        soundID_1 = soundPool_main_1.load(getActivity(),R.raw.hihat_1,1);
+        soundID_metronome = soundPool_main_1.load(getActivity(),R.raw.metronome,1);
+        soundID_2 = soundPool_main_1.load(getActivity(),R.raw.drum_2,1);
+
+//        soundPool_main_2 = new SoundPool.Builder().setMaxStreams(32).build();
+        soundID_3 = soundPool_main_1.load(getActivity(),R.raw.drum_1,1);
+        soundID_4 = soundPool_main_1.load(getActivity(),R.raw.bass_drum,1);
+        soundID_5 = soundPool_main_1.load(getActivity(),R.raw.hihat_2,1);
 
     }
 
@@ -97,7 +100,7 @@ public class MainFragment extends android.app.Fragment {
             @Override
             public void run() {
                 Log.e(TAG, "run: time\t" + System.currentTimeMillis());
-                soundPool_main.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
+                soundPool_main_1.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
                 handler_delay.postDelayed(this,988*60/metronome_rate);
 
             }
@@ -130,7 +133,7 @@ public class MainFragment extends android.app.Fragment {
                         @Override
                         public void run() {
                             Log.e(TAG, "run: timer\t" + System.currentTimeMillis() );
-                            soundPool_main.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
+                            soundPool_main_1.play(soundID_metronome,(float)0.2,(float)0.2,1,0,1);
                         }
                     };
 
@@ -155,7 +158,7 @@ public class MainFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Button1");
-                soundPool_main.play(soundID_1,(float)0.5,(float)0.5,1,0,1);
+                soundPool_main_1.play(soundID_1,(float)0.5,(float)0.5,1,0,1);
 
             }
         });
@@ -164,7 +167,7 @@ public class MainFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Button2");
-                soundPool_main.play(soundID_2,1,1,1,0,1);
+                soundPool_main_1.play(soundID_2,1,1,1,0,1);
 
             }
         });
@@ -173,7 +176,7 @@ public class MainFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Button3");
-                soundPool_main.play(soundID_3,1,1,1,0,1);
+                soundPool_main_1.play(soundID_3,1,1,1,0,1);
 
             }
         });
@@ -182,7 +185,7 @@ public class MainFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Button4");
-                soundPool_main.play(soundID_4,1,1,1,0,1);
+                soundPool_main_1.play(soundID_4,1,1,1,0,1);
 
             }
         });
@@ -210,14 +213,14 @@ public class MainFragment extends android.app.Fragment {
 
 
         return view;
-
     }
 
 
     @Override
     public void onPause() {
 
-        soundPool_main.release();
+        soundPool_main_1.release();
+//        soundPool_main_2.release();
 
         super.onPause();
     }
