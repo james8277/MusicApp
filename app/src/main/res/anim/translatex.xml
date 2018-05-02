@@ -5,12 +5,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <translate
-        android:fromYDelta="-1200"
+        android:fromYDelta="-1500"
         android:toYDelta="5"
-        android:duration="2980"/>
+        android:duration="2975"/>
 
     <alpha
-        android:startOffset="3000"
+        android:startOffset="2950"
         android:toAlpha="0"
         android:fromAlpha="1"
         android:duration="100"/>
