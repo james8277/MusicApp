@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     private DataBase dataBase;
     private ArrayList<Integer[]> arrayList_song_example_easy;
+    private ArrayList<Integer[]> arrayList_song_example_normal;
 
 
-    public void addExampleSong()
+    public void addEasyExampleSong()
     {
         arrayList_song_example_easy = new ArrayList<Integer[]>();
         for(int i=0;i<4;i++)
@@ -70,8 +71,62 @@ public class MainActivity extends AppCompatActivity {
             temp[0][i] = arrayList_song_example_easy.get(i)[0].toString();
             temp[1][i] = arrayList_song_example_easy.get(i)[1].toString();
         }
-        dataBase.addSong(temp,"Example song easy " + dataBase.getSongNumber());
+        dataBase.addSong(temp,"Example Song: Easy");
+    }
+    public void addNormalExampleSong()
+    {
+        arrayList_song_example_normal = new ArrayList<Integer[]>();
+        for(int i=0;i<4;i++)
+        {
+            Integer temp_int_array_1[] = new Integer[2];
+            temp_int_array_1[0] = 1000*(i)*60/120;
+            temp_int_array_1[1] = 0;
+            arrayList_song_example_normal.add(temp_int_array_1);
+        }
+        for(int i=4;i<36;i++)
+        {
+            Integer temp_int_array_1[] = new Integer[2];
+            temp_int_array_1[0] = 1000*(i)*60/120;
+            temp_int_array_1[1] = 1;
+            arrayList_song_example_normal.add(temp_int_array_1);
+            if((i+4)%8 == 0)
+            {
+                Integer temp_int_array_2[] = new Integer[2];
+                temp_int_array_2[0] = 1000*(i)*60/120;
+                temp_int_array_2[1] = 4;
+                arrayList_song_example_normal.add(temp_int_array_2);
+            }
+            if((i+4)%8 == 3)
+            {
+                Integer temp_int_array_2[] = new Integer[2];
+                temp_int_array_2[0] = 1000*(i)*60/120;
+                temp_int_array_2[1] = 4;
+                arrayList_song_example_normal.add(temp_int_array_2);
+            }
+            if((i+4)%8 == 5)
+            {
+                Integer temp_int_array_2[] = new Integer[2];
+                temp_int_array_2[0] = 1000*(i)*60/120;
+                temp_int_array_2[1] = 4;
+                arrayList_song_example_normal.add(temp_int_array_2);
+            }
+            if(i%4 == 2)
+            {
+                Integer temp_int_array_3[] = new Integer[2];
+                temp_int_array_3[0] = 1000*(i)*60/120;
+                temp_int_array_3[1] = 3;
+                arrayList_song_example_normal.add(temp_int_array_3);
+            }
+        }
 
+//        Log.e(TAG, "addExampleSong: size" + arrayList_song_example_easy.size() );
+        String temp[][] = new String[2][arrayList_song_example_normal.size()];
+        for(int i=0;i<arrayList_song_example_normal.size();i++)
+        {
+            temp[0][i] = arrayList_song_example_normal.get(i)[0].toString();
+            temp[1][i] = arrayList_song_example_normal.get(i)[1].toString();
+        }
+        dataBase.addSong(temp,"Example Song: Normal");
     }
 
 
@@ -82,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
         dataBase = new DataBase(this,"Database Record",null, 1);
 
-        addExampleSong();
+        addEasyExampleSong();
+        addNormalExampleSong();
 
 
         FragmentTransaction mf = getFragmentManager().beginTransaction();

@@ -5,6 +5,7 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,9 +37,10 @@ import java.util.TimerTask;
 public class Training extends android.app.Fragment {
 
     private static final String TAG = "FragmentTraining";
-    Button button_practice;
-    Button button_back;
-    Button button_example;
+    private Button button_practice;
+    private Button button_back;
+    private Button button_example;
+    private Button button_set_difficulty;
     private Button button_1;
     private Button button_2;
     private Button button_3;
@@ -85,6 +88,10 @@ public class Training extends android.app.Fragment {
     int trackEasySize;
     int trackEasyData[];
     int trackEasyTime[];
+    int trackNormalSize;
+    int trackNormalData[];
+    int trackNormalTime[];
+
     int trackCount;
     int trackSetCount;
 
@@ -96,7 +103,8 @@ public class Training extends android.app.Fragment {
     int clickTiming_3 = 0;
     int clickTiming_4 = 0;
 
-    int difficulty = 1;
+    int difficulty = 0;
+
 
 
     int streamPlay;
@@ -282,215 +290,434 @@ public class Training extends android.app.Fragment {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
-    private void playTrackEasyExample() {
-        for (int i = 0; i < trackEasySize; i++) {
-            if(trackEasyData[i] == 0)
-            {
-                timerTask_example = new TimerTask() {
-                    @Override
-                    public void run() {
-                        soundPool_training_1.play(soundID_5,(float)0.1,(float)0.1,1,0,1);
-                        soundPool_training_1.stop(soundID_5);
+    private void playTrackExample(int difficulty) {
+        if(difficulty == 0)
+        {
+            for (int i = 0; i < trackEasySize; i++) {
+                if(trackEasyData[i] == 0)
+                {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            soundPool_training_1.play(soundID_5,(float)0.1,(float)0.1,1,0,1);
+                            soundPool_training_1.stop(soundID_5);
 
-                    }
-                };
-            }
-            if (trackEasyData[i] == 1) {
-                timerTask_example = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                button_1.performClick();
-                                handler_example.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        button_1.setPressed(false);
-                                    }
-                                }, 100);
-                            }
-                        });
-                    }
-                };
-            }
-            if (trackEasyData[i] == 2) {
-                timerTask_example = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                button_2.performClick();
-                                handler_example.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        button_2.setPressed(false);
-                                    }
-                                }, 100);
-                            }
-                        });
-                    }
-                };
-            }
-            if (trackEasyData[i] == 3) {
-                timerTask_example = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                button_3.performClick();
-                                handler_example.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        button_3.setPressed(false);
-                                    }
-                                }, 100);
-                            }
-                        });
-                    }
-                };
-            }
-            if (trackEasyData[i] == 4) {
-                timerTask_example = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                button_4.performClick();
-                                handler_example.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        button_4.setPressed(false);
-                                    }
-                                }, 100);
-                            }
-                        });
-                    }
-                };
-            }
+                        }
+                    };
+                }
+                if (trackEasyData[i] == 1) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_1.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_1.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackEasyData[i] == 2) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_2.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_2.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackEasyData[i] == 3) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_3.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_3.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackEasyData[i] == 4) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_4.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_4.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
 //                        Log.e(TAG, "time\t" + temp_data_time[i]);
-            if(i < 4)
-            {
-                timer_example.schedule(timerTask_example, trackEasyTime[i]);
+                if(i < 4)
+                {
+                    timer_example.schedule(timerTask_example, trackEasyTime[i]);
+                }
+                else
+                {
+                    timer_example.schedule(timerTask_example, trackEasyTime[i]-20);
+                }
             }
-            else
-            {
-                timer_example.schedule(timerTask_example, trackEasyTime[i]-20);
-            }
+        }
+        else if(difficulty == 1)
+        {
+            for (int i = 0; i < trackNormalSize; i++) {
+                if(trackNormalData[i] == 0)
+                {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            soundPool_training_1.play(soundID_5,(float)0.1,(float)0.1,1,0,1);
+                            soundPool_training_1.stop(soundID_5);
 
+                        }
+                    };
+                }
+                if (trackNormalData[i] == 1) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_1.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_1.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackNormalData[i] == 2) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_2.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_2.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackNormalData[i] == 3) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_3.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_3.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackNormalData[i] == 4) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_4.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_4.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+//                        Log.e(TAG, "time\t" + temp_data_time[i]);
+                if(i < 4)
+                {
+                    timer_example.schedule(timerTask_example, trackNormalTime[i]);
+                }
+                else
+                {
+                    timer_example.schedule(timerTask_example, trackNormalTime[i]-20);
+                }
+
+            }
         }
     }
-    private void playTrackEasyTraining() {
-        for(trackCount=0;trackCount<trackEasySize;trackCount++)
+    private void playTrackTraining() {
+        if(difficulty == 0)
         {
-            if (trackEasyData[trackCount] == 1)
+            for(trackCount=0;trackCount<trackEasySize;trackCount++)
             {
-                timerTask_training = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Button button_test_1 = new Button(getActivity());
-                                button_test_1.setBackground(getResources().getDrawable(R.drawable.round_circle));
-                                Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
-                                button_test_1.setAnimation(animation);
+                if (trackEasyData[trackCount] == 1)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_1 = new Button(getActivity());
+                                    button_test_1.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
+                                    button_test_1.setAnimation(animation);
 
-                                ConstraintLayout.LayoutParams layoutParams_1 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
-                                layoutParams_1.leftToLeft = R.id.Button_1_training;
-                                layoutParams_1.rightToRight = R.id.Button_1_training;
-                                layoutParams_1.topToTop = R.id.Button_1_training;
-                                layoutParams_1.bottomToBottom = R.id.Button_1_training;
+                                    ConstraintLayout.LayoutParams layoutParams_1 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_1.leftToLeft = R.id.Button_1_training;
+                                    layoutParams_1.rightToRight = R.id.Button_1_training;
+                                    layoutParams_1.topToTop = R.id.Button_1_training;
+                                    layoutParams_1.bottomToBottom = R.id.Button_1_training;
 
-                                constraintLayout.addView(button_test_1,-1,layoutParams_1);
-                                button_1.bringToFront();
-                            }
-                        });
-                    }
-                };
-            }
-            if (trackEasyData[trackCount] == 2)
-            {
-                timerTask_training = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Button button_test_2 = new Button(getActivity());
-                                button_test_2.setBackground(getResources().getDrawable(R.drawable.round_circle));
-                                Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
-                                button_test_2.setAnimation(animation);
+                                    constraintLayout.addView(button_test_1,-1,layoutParams_1);
+                                    button_1.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackEasyData[trackCount] == 2)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_2 = new Button(getActivity());
+                                    button_test_2.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
+                                    button_test_2.setAnimation(animation);
 
-                                ConstraintLayout.LayoutParams layoutParams_2 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
-                                layoutParams_2.leftToLeft = R.id.Button_2_training;
-                                layoutParams_2.rightToRight = R.id.Button_2_training;
-                                layoutParams_2.topToTop = R.id.Button_2_training;
-                                layoutParams_2.bottomToBottom = R.id.Button_2_training;
-                                constraintLayout.addView(button_test_2,-1,layoutParams_2);
-                                button_2.bringToFront();
-                            }
-                        });
-                    }
-                };
-            }
-            if (trackEasyData[trackCount] == 3)
-            {
-                timerTask_training = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Button button_test_3 = new Button(getActivity());
-                                button_test_3.setBackground(getResources().getDrawable(R.drawable.round_circle));
-                                Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
-                                button_test_3.setAnimation(animation);
+                                    ConstraintLayout.LayoutParams layoutParams_2 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_2.leftToLeft = R.id.Button_2_training;
+                                    layoutParams_2.rightToRight = R.id.Button_2_training;
+                                    layoutParams_2.topToTop = R.id.Button_2_training;
+                                    layoutParams_2.bottomToBottom = R.id.Button_2_training;
+                                    constraintLayout.addView(button_test_2,-1,layoutParams_2);
+                                    button_2.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackEasyData[trackCount] == 3)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_3 = new Button(getActivity());
+                                    button_test_3.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
+                                    button_test_3.setAnimation(animation);
 
-                                ConstraintLayout.LayoutParams layoutParams_3 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
-                                layoutParams_3.leftToLeft = R.id.Button_3_training;
-                                layoutParams_3.rightToRight = R.id.Button_3_training;
-                                layoutParams_3.topToTop = R.id.Button_3_training;
-                                layoutParams_3.bottomToBottom = R.id.Button_3_training;
-                                constraintLayout.addView(button_test_3,-1,layoutParams_3);
-                                button_3.bringToFront();
-                            }
-                        });
-                    }
-                };
-            }
-            if (trackEasyData[trackCount] == 4)
-            {
-                timerTask_training = new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Button button_test_4 = new Button(getActivity());
-                                button_test_4.setBackground(getResources().getDrawable(R.drawable.round_circle));
-                                Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
-                                button_test_4.setAnimation(animation);
+                                    ConstraintLayout.LayoutParams layoutParams_3 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_3.leftToLeft = R.id.Button_3_training;
+                                    layoutParams_3.rightToRight = R.id.Button_3_training;
+                                    layoutParams_3.topToTop = R.id.Button_3_training;
+                                    layoutParams_3.bottomToBottom = R.id.Button_3_training;
+                                    constraintLayout.addView(button_test_3,-1,layoutParams_3);
+                                    button_3.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackEasyData[trackCount] == 4)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_4 = new Button(getActivity());
+                                    button_test_4.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex);
+                                    button_test_4.setAnimation(animation);
 
-                                ConstraintLayout.LayoutParams layoutParams_4 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
-                                layoutParams_4.leftToLeft = R.id.Button_4_training;
-                                layoutParams_4.rightToRight = R.id.Button_4_training;
-                                layoutParams_4.topToTop = R.id.Button_4_training;
-                                layoutParams_4.bottomToBottom = R.id.Button_4_training;
-                                constraintLayout.addView(button_test_4,-1,layoutParams_4);
-                                button_4.bringToFront();
-                            }
-                        });
-                    }
-                };
-            }
+                                    ConstraintLayout.LayoutParams layoutParams_4 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_4.leftToLeft = R.id.Button_4_training;
+                                    layoutParams_4.rightToRight = R.id.Button_4_training;
+                                    layoutParams_4.topToTop = R.id.Button_4_training;
+                                    layoutParams_4.bottomToBottom = R.id.Button_4_training;
+                                    constraintLayout.addView(button_test_4,-1,layoutParams_4);
+                                    button_4.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
 //            Log.e(TAG, "time\t" + trackEasyTime[trackCount]);
-            if(trackCount >= 4)
+                if(trackCount >= 4)
+                {
+                    timer_training.schedule(timerTask_training, trackEasyTime[trackCount]-3000);
+                }
+            }
+        }
+        else if(difficulty == 1)
+        {
+            for(trackCount=0;trackCount<trackNormalSize;trackCount++)
             {
-                timer_training.schedule(timerTask_training, trackEasyTime[trackCount]-3000);
+                if (trackNormalData[trackCount] == 1)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_1 = new Button(getActivity());
+                                    button_test_1.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex_normal);
+                                    button_test_1.setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_1 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_1.leftToLeft = R.id.Button_1_training;
+                                    layoutParams_1.rightToRight = R.id.Button_1_training;
+                                    layoutParams_1.topToTop = R.id.Button_1_training;
+                                    layoutParams_1.bottomToBottom = R.id.Button_1_training;
+
+                                    constraintLayout.addView(button_test_1,-1,layoutParams_1);
+                                    button_1.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackNormalData[trackCount] == 2)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_2 = new Button(getActivity());
+                                    button_test_2.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex_normal);
+                                    button_test_2.setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_2 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_2.leftToLeft = R.id.Button_2_training;
+                                    layoutParams_2.rightToRight = R.id.Button_2_training;
+                                    layoutParams_2.topToTop = R.id.Button_2_training;
+                                    layoutParams_2.bottomToBottom = R.id.Button_2_training;
+                                    constraintLayout.addView(button_test_2,-1,layoutParams_2);
+                                    button_2.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackNormalData[trackCount] == 3)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_3 = new Button(getActivity());
+                                    button_test_3.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex_normal);
+                                    button_test_3.setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_3 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_3.leftToLeft = R.id.Button_3_training;
+                                    layoutParams_3.rightToRight = R.id.Button_3_training;
+                                    layoutParams_3.topToTop = R.id.Button_3_training;
+                                    layoutParams_3.bottomToBottom = R.id.Button_3_training;
+                                    constraintLayout.addView(button_test_3,-1,layoutParams_3);
+                                    button_3.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackNormalData[trackCount] == 4)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Button button_test_4 = new Button(getActivity());
+                                    button_test_4.setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translatex_normal);
+                                    button_test_4.setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_4 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_4.leftToLeft = R.id.Button_4_training;
+                                    layoutParams_4.rightToRight = R.id.Button_4_training;
+                                    layoutParams_4.topToTop = R.id.Button_4_training;
+                                    layoutParams_4.bottomToBottom = R.id.Button_4_training;
+                                    constraintLayout.addView(button_test_4,-1,layoutParams_4);
+                                    button_4.bringToFront();
+                                }
+                            });
+                        }
+                    };
+                }
+//            Log.e(TAG, "time\t" + trackEasyTime[trackCount]);
+                if(trackCount >= 4)
+                {
+                    timer_training.schedule(timerTask_training, trackNormalTime[trackCount]-2000);
+                }
             }
         }
     }
@@ -549,170 +776,339 @@ public class Training extends android.app.Fragment {
         TimerTask timerTask_button_4_deactivate;
         TimerTask timerTask_button_4_early;
         TimerTask timerTask_button_4_late;
-        for(trackSetCount=0;trackSetCount<trackEasySize;trackSetCount++)
+        if(difficulty == 0)
         {
-            if (trackEasyData[trackSetCount] == 1)
+            for(trackSetCount=0;trackSetCount<trackEasySize;trackSetCount++)
             {
-                timerTask_button_1_activate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_1.setClickable(true);
-                        clickTiming_1 = 1;
-                    }
-                };
-                timerTask_button_1_deactivate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_1.setClickable(false);
-                        clickTiming_1 = 0;
-                    }
-                };
-                timerTask_button_1_early = new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_1 = 2;
-                    }
-                };
-                timerTask_button_1_late =  new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_1 = 3;
-                    }
-                };
-                timer_click.schedule(timerTask_button_1_early,trackEasyTime[trackSetCount]-10);
-                timer_click.schedule(timerTask_button_1_late,trackEasyTime[trackSetCount]+110);
-                timer_click.schedule(timerTask_button_1_activate,trackEasyTime[trackSetCount]-500);
-
-                if(trackSetCount < trackEasySize-1)
+                if (trackEasyData[trackSetCount] == 1)
                 {
-                    if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+1]-500)
+                    timerTask_button_1_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_1.setClickable(true);
+                            clickTiming_1 = 1;
+                        }
+                    };
+                    timerTask_button_1_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_1.setClickable(false);
+                            clickTiming_1 = 0;
+                        }
+                    };
+                    timerTask_button_1_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_1 = 2;
+                        }
+                    };
+                    timerTask_button_1_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_1 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_1_early,trackEasyTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_1_late,trackEasyTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_1_activate,trackEasyTime[trackSetCount]-500);
+
+                    if(trackSetCount < trackEasySize-1)
                     {
-                        timer_click.schedule(timerTask_button_1_deactivate,trackEasyTime[trackSetCount]+500);
+                        if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_1_deactivate,trackEasyTime[trackSetCount]+500);
+                        }
                     }
                 }
-            }
-            if (trackEasyData[trackSetCount] == 2)
-            {
-                timerTask_button_2_activate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_2.setClickable(true);
-                        clickTiming_2 = 1;
-                    }
-                };
-                timerTask_button_2_deactivate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_2.setClickable(false);
-                        clickTiming_2 = 0;
-                    }
-                };
-                timerTask_button_2_early = new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_2 = 2;
-                    }
-                };
-                timerTask_button_2_late =  new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_2 = 3;
-                    }
-                };
-                timer_click.schedule(timerTask_button_2_early,trackEasyTime[trackSetCount]-10);
-                timer_click.schedule(timerTask_button_2_late,trackEasyTime[trackSetCount]+110);
-                timer_click.schedule(timerTask_button_2_activate,trackEasyTime[trackSetCount]-500);
-
-                if(trackSetCount < trackEasySize-1)
+                if (trackEasyData[trackSetCount] == 2)
                 {
-                    if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+1]-500)
+                    timerTask_button_2_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_2.setClickable(true);
+                            clickTiming_2 = 1;
+                        }
+                    };
+                    timerTask_button_2_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_2.setClickable(false);
+                            clickTiming_2 = 0;
+                        }
+                    };
+                    timerTask_button_2_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_2 = 2;
+                        }
+                    };
+                    timerTask_button_2_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_2 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_2_early,trackEasyTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_2_late,trackEasyTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_2_activate,trackEasyTime[trackSetCount]-500);
+
+                    if(trackSetCount < trackEasySize-1)
                     {
-                        timer_click.schedule(timerTask_button_2_deactivate,trackEasyTime[trackSetCount]+500);
+                        if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_2_deactivate,trackEasyTime[trackSetCount]+500);
+                        }
                     }
                 }
-            }
-            if (trackEasyData[trackSetCount] == 3)
-            {
-                timerTask_button_3_activate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_3.setClickable(true);
-                        clickTiming_3 = 1;
-                    }
-                };
-                timerTask_button_3_deactivate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_3.setClickable(false);
-                        clickTiming_3 = 0;
+                if (trackEasyData[trackSetCount] == 3)
+                {
+                    timerTask_button_3_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_3.setClickable(true);
+                            clickTiming_3 = 1;
+                        }
+                    };
+                    timerTask_button_3_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_3.setClickable(false);
+                            clickTiming_3 = 0;
 //                        Log.e(TAG, "setClickTime: deactivate");
-                    }
-                };
-                timerTask_button_3_early = new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_3 = 2;
-                    }
-                };
-                timerTask_button_3_late =  new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_3 = 3;
-                    }
-                };
-                timer_click.schedule(timerTask_button_3_early,trackEasyTime[trackSetCount]-10);
-                timer_click.schedule(timerTask_button_3_late,trackEasyTime[trackSetCount]+110);
-                timer_click.schedule(timerTask_button_3_activate,trackEasyTime[trackSetCount]-500);
-                if(trackSetCount < trackEasySize-4)
-                {
+                        }
+                    };
+                    timerTask_button_3_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_3 = 2;
+                        }
+                    };
+                    timerTask_button_3_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_3 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_3_early,trackEasyTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_3_late,trackEasyTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_3_activate,trackEasyTime[trackSetCount]-500);
+                    if(trackSetCount < trackEasySize-4)
+                    {
 //                    Log.e(TAG, "button_3 = \t" + (trackEasyTime[trackSetCount]+500) + "\t" +
 //                            (trackEasyTime[trackSetCount+1]-500));
-                    if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+4]-500)
-                    {
-                        timer_click.schedule(timerTask_button_3_deactivate,trackEasyTime[trackSetCount]+500);
+                        if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+4]-500)
+                        {
+                            timer_click.schedule(timerTask_button_3_deactivate,trackEasyTime[trackSetCount]+500);
+                        }
                     }
                 }
-            }
-            if (trackEasyData[trackSetCount] == 4)
-            {
-                timerTask_button_4_activate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_4.setClickable(true);
-                        clickTiming_4 = 1;
-                    }
-                };
-                timerTask_button_4_deactivate = new TimerTask() {
-                    @Override
-                    public void run() {
-                        button_4.setClickable(false);
-                        clickTiming_4 = 0;
-                    }
-                };
-                timerTask_button_4_early = new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_4 = 2;
-                    }
-                };
-                timerTask_button_4_late =  new TimerTask() {
-                    @Override
-                    public void run() {
-                        clickTiming_4 = 3;
-                    }
-                };
-                timer_click.schedule(timerTask_button_4_early,trackEasyTime[trackSetCount]-10);
-                timer_click.schedule(timerTask_button_4_late,trackEasyTime[trackSetCount]+110);
-                timer_click.schedule(timerTask_button_4_activate,trackEasyTime[trackSetCount]-500);
-                if(trackSetCount < trackEasySize-4)
+                if (trackEasyData[trackSetCount] == 4)
                 {
-                    if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+4]-500)
+                    timerTask_button_4_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_4.setClickable(true);
+                            clickTiming_4 = 1;
+                        }
+                    };
+                    timerTask_button_4_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_4.setClickable(false);
+                            clickTiming_4 = 0;
+                        }
+                    };
+                    timerTask_button_4_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_4 = 2;
+                        }
+                    };
+                    timerTask_button_4_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_4 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_4_early,trackEasyTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_4_late,trackEasyTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_4_activate,trackEasyTime[trackSetCount]-500);
+                    if(trackSetCount < trackEasySize-4)
                     {
-                        timer_click.schedule(timerTask_button_4_deactivate,trackEasyTime[trackSetCount]+500);
+                        if(trackEasyTime[trackSetCount]+500 < trackEasyTime[trackSetCount+4]-500)
+                        {
+                            timer_click.schedule(timerTask_button_4_deactivate,trackEasyTime[trackSetCount]+500);
+                        }
                     }
                 }
             }
         }
+        else if(difficulty == 1)
+        {
+            for(trackSetCount=0;trackSetCount<trackNormalSize;trackSetCount++)
+            {
+                if (trackNormalData[trackSetCount] == 1)
+                {
+                    timerTask_button_1_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_1.setClickable(true);
+                            clickTiming_1 = 1;
+                        }
+                    };
+                    timerTask_button_1_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_1.setClickable(false);
+                            clickTiming_1 = 0;
+                        }
+                    };
+                    timerTask_button_1_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_1 = 2;
+                        }
+                    };
+                    timerTask_button_1_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_1 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_1_early,trackNormalTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_1_late,trackNormalTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_1_activate,trackNormalTime[trackSetCount]-500);
+
+                    if(trackSetCount < trackNormalSize-1)
+                    {
+                        if(trackNormalTime[trackSetCount]+500 < trackNormalTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_1_deactivate,trackNormalTime[trackSetCount]+500);
+                        }
+                    }
+                }
+                if (trackNormalData[trackSetCount] == 2)
+                {
+                    timerTask_button_2_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_2.setClickable(true);
+                            clickTiming_2 = 1;
+                        }
+                    };
+                    timerTask_button_2_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_2.setClickable(false);
+                            clickTiming_2 = 0;
+                        }
+                    };
+                    timerTask_button_2_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_2 = 2;
+                        }
+                    };
+                    timerTask_button_2_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_2 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_2_early,trackNormalTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_2_late,trackNormalTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_2_activate,trackNormalTime[trackSetCount]-500);
+
+                    if(trackSetCount < trackNormalSize-1)
+                    {
+                        if(trackNormalTime[trackSetCount]+500 < trackNormalTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_2_deactivate,trackNormalTime[trackSetCount]+500);
+                        }
+                    }
+                }
+                if (trackNormalData[trackSetCount] == 3)
+                {
+                    timerTask_button_3_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_3.setClickable(true);
+                            clickTiming_3 = 1;
+                        }
+                    };
+                    timerTask_button_3_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_3.setClickable(false);
+                            clickTiming_3 = 0;
+//                        Log.e(TAG, "setClickTime: deactivate");
+                        }
+                    };
+                    timerTask_button_3_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_3 = 2;
+                        }
+                    };
+                    timerTask_button_3_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_3 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_3_early,trackNormalTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_3_late,trackNormalTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_3_activate,trackNormalTime[trackSetCount]-500);
+                    if(trackSetCount < trackNormalSize-4)
+                    {
+                        if(trackNormalTime[trackSetCount]+500 < trackNormalTime[trackSetCount+4]-500)
+                        {
+                            timer_click.schedule(timerTask_button_3_deactivate,trackNormalTime[trackSetCount]+500);
+                        }
+                    }
+                }
+                if (trackNormalData[trackSetCount] == 4)
+                {
+                    timerTask_button_4_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_4.setClickable(true);
+                            clickTiming_4 = 1;
+                        }
+                    };
+                    timerTask_button_4_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_4.setClickable(false);
+                            clickTiming_4 = 0;
+                        }
+                    };
+                    timerTask_button_4_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_4 = 2;
+                        }
+                    };
+                    timerTask_button_4_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_4 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_4_early,trackNormalTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_4_late,trackNormalTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_4_activate,trackNormalTime[trackSetCount]-500);
+                    if(trackSetCount < trackNormalSize-4)
+                    {
+                        if(trackNormalTime[trackSetCount]+500 < trackNormalTime[trackSetCount+4]-500)
+                        {
+                            timer_click.schedule(timerTask_button_4_deactivate,trackNormalTime[trackSetCount]+500);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
 
@@ -739,7 +1135,7 @@ public class Training extends android.app.Fragment {
 
         dataBase_training = new DataBase(getActivity(),"Database Record",null, 1);
 
-        count = -8;
+        count = 3;
 
         DataBase dataBase_training = new DataBase(getActivity(),"Database Record",null, 1);
 
@@ -747,6 +1143,9 @@ public class Training extends android.app.Fragment {
         trackEasyData = dataBase_training.getSongData(0);
         trackEasyTime = dataBase_training.getSongTime(0);
 
+        trackNormalSize = dataBase_training.getSongData(1).length;
+        trackNormalData = dataBase_training.getSongData(1);
+        trackNormalTime = dataBase_training.getSongTime(1);
 
 
         drum_track = new int[4][5];
@@ -784,7 +1183,7 @@ public class Training extends android.app.Fragment {
         button_example = (Button)view_training.findViewById(R.id.Button_example);
         button_back = (Button)view_training.findViewById(R.id.Button_back__training);
         button_practice = (Button)view_training.findViewById(R.id.Button_practice);
-
+        button_set_difficulty = (Button)view_training.findViewById(R.id.Button_set_difficulty);
 
 
         return view_training;
@@ -824,7 +1223,14 @@ public class Training extends android.app.Fragment {
                     button_practice.setText(R.string.stop);
                     mediaPlayer_track.start();
                     timer_countdown = new Timer();
-                    timer_countdown.schedule(timerTask_countdown,0,1000*60/80);
+                    if(difficulty == 0)
+                    {
+                        timer_countdown.schedule(timerTask_countdown,0,1000*60/80);
+                    }
+                    else if(difficulty == 1)
+                    {
+                        timer_countdown.schedule(timerTask_countdown,0,1000*60/120);
+                    }
 
                     timer_click = new Timer();
 
@@ -856,11 +1262,9 @@ public class Training extends android.app.Fragment {
                     constraintLayout = (ConstraintLayout)view_training.findViewById(R.id.constrainLayout_training);
 //                    TimerTask timerTask_test[] = new TimerTask[tempSize];
 
-                    if(difficulty == 1)
-                    {
-                        playTrackEasyTraining();
-                        setClickTime();
-                    }
+                    playTrackTraining();
+                    setClickTime();
+
 
                 }
                 else
@@ -1039,11 +1443,8 @@ public class Training extends android.app.Fragment {
                         }
                     });
                     timer_example = new Timer();
+                    playTrackExample(difficulty);
 
-                    if(difficulty == 1)
-                    {
-                        playTrackEasyExample();
-                    }
 //                    timer_training = new Timer();
 //                    timerTask_training = newTimerTask();
 //                    timer_training.schedule(timerTask_training,0,1000*68/120);
@@ -1063,6 +1464,39 @@ public class Training extends android.app.Fragment {
 //                    timer_training.purge();
                 }
 
+            }
+        });
+
+        button_set_difficulty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                String string_difficulty[] = dataBase_training.getSongName();
+                Log.e(TAG, "Example:\t" + string_difficulty[0] + "\t" + string_difficulty[1] );
+
+                builder.setTitle("Choose difficulty")
+                        .setItems(string_difficulty, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                difficulty = which;
+                                if(which == 0)
+                                {
+                                    button_set_difficulty.setText(R.string.easy);
+                                    mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.example_easy_space);
+                                    mediaPlayer_track = MediaPlayer.create(getActivity(),R.raw.example_easy_space);
+                                }
+                                else if(which == 1)
+                                {
+                                    button_set_difficulty.setText(R.string.normal);
+                                    mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.example_normal_space);
+                                    mediaPlayer_track = MediaPlayer.create(getActivity(),R.raw.example_normal_space);
+                                }
+                                Log.e(TAG, "Difficulty = \t" + difficulty);
+                            }
+                        });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 

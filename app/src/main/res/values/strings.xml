@@ -25,4 +25,7 @@
     <string name="yes">Yes</string>
     <string name="chooseTrack">Choose a Track</string>
     <string name="save_check">Do you wnat to save the track?</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="easy">Easy</string>
+    <string name="normal">Normal</string>
 </resources>
