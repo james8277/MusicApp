@@ -187,7 +187,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     public void addSong(String[][] song_track, String song_name)
     {
-        if(getSongNumber() != 2)
+        if(getSongNumber() != 3)
         {
             Log.e(TAG, "addSong: song" + song_name);
             SQLiteDatabase database = this.getWritableDatabase();
