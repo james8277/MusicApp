@@ -2,8 +2,6 @@
     <string name="app_name">Music App</string>
     <string name="training_mode">Training mode</string>
     <string name="button_back">Back</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_play">Play</string>
     <string name="button_example">Example</string>
@@ -24,9 +22,10 @@
     <string name="alert">Delete all record track?</string>
     <string name="yes">Yes</string>
     <string name="chooseTrack">Choose a Track</string>
-    <string name="save_check">Do you wnat to save the track?</string>
+    <string name="save_check">Do you want to save the track?</string>
     <string name="difficulty">Difficulty</string>
     <string name="easy">Easy</string>
     <string name="normal">Normal</string>
     <string name="sunnyday">Sunny Day</string>
+    <string name="canon">Canon</string>
 </resources>

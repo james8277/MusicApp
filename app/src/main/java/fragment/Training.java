@@ -101,6 +101,9 @@ public class Training extends android.app.Fragment {
     int trackSunnyDaySize;
     int trackSunnyDayData[];
     int trackSunnyDayTime[];
+    int trackCanonSize;
+    int trackCanonData[];
+    int trackCanonTime[];
 
     int trackCount;
     int trackSetCount;
@@ -611,6 +614,108 @@ public class Training extends android.app.Fragment {
 
             }
         }
+        else if(difficulty == 3)
+        {
+            for (int i = 0; i < trackCanonSize; i++) {
+                if(trackCanonData[i] == 0)
+                {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            soundPool_training_1.play(soundID_5,(float)0.1,(float)0.1,1,0,1);
+                            soundPool_training_1.stop(soundID_5);
+
+                        }
+                    };
+                }
+                if (trackCanonData[i] == 1) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_1.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_1.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackCanonData[i] == 2) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_2.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_2.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackCanonData[i] == 3) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_3.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_3.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackCanonData[i] == 4) {
+                    timerTask_example = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_4.performClick();
+                                    handler_example.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            button_4.setPressed(false);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    };
+                }
+//                        Log.e(TAG, "time\t" + temp_data_time[i]);
+                if(i < 4)
+                {
+                    timer_example.schedule(timerTask_example, trackCanonTime[i]);
+                }
+                else
+                {
+                    timer_example.schedule(timerTask_example, trackCanonTime[i]-20);
+                }
+
+            }
+        }
     }
     private void playTrackTraining() {
         buttonCount_1 = 0;
@@ -644,7 +749,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_1[buttonCount_1]);
+                                            if(button_test_1 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_1[buttonCount_1]);
+                                            }
                                         }
 
                                         @Override
@@ -687,7 +795,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            if(button_test_2 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            }
                                         }
 
                                         @Override
@@ -729,7 +840,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            if(button_test_3 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            }
                                         }
 
                                         @Override
@@ -771,7 +885,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            if(button_test_4 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            }
                                         }
 
                                         @Override
@@ -828,7 +945,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_1[buttonCount_1]);
+                                            if(button_test_1 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_1[buttonCount_1]);
+                                            }
                                         }
 
                                         @Override
@@ -871,7 +991,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            if(button_test_2 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            }
                                         }
 
                                         @Override
@@ -913,7 +1036,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            if(button_test_3 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            }
                                         }
 
                                         @Override
@@ -955,7 +1081,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            if(button_test_4 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            }
                                         }
 
                                         @Override
@@ -1012,8 +1141,11 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_1[buttonCount_1]);
-                                            Log.e(TAG, "onAnimationEnd");
+                                            if(button_test_1 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_1[buttonCount_1]);
+                                            }
+//                                            Log.e(TAG, "onAnimationEnd");
                                         }
 
                                         @Override
@@ -1056,7 +1188,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            if(button_test_2 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            }
                                         }
 
                                         @Override
@@ -1098,7 +1233,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            if(button_test_3 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            }
                                         }
 
                                         @Override
@@ -1140,7 +1278,10 @@ public class Training extends android.app.Fragment {
 
                                         @Override
                                         public void onAnimationEnd(Animation animation) {
-                                            constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            if(button_test_4 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            }
                                         }
 
                                         @Override
@@ -1167,6 +1308,203 @@ public class Training extends android.app.Fragment {
                 if(trackCount >= 4)
                 {
                     timer_training.schedule(timerTask_training, trackSunnyDayTime[trackCount]-1764);
+                }
+            }
+        }
+        else if(difficulty == 3)
+        {
+            button_test_1 = new Button[trackCanonSize];
+            button_test_2 = new Button[trackCanonSize];
+            button_test_3 = new Button[trackCanonSize];
+            button_test_4 = new Button[trackCanonSize];
+            for(trackCount=0;trackCount<trackCanonSize;trackCount++)
+            {
+                if (trackCanonData[trackCount] == 1)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_test_1[buttonCount_1] = new Button(getActivity());
+                                    button_test_1[buttonCount_1].setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translate_canon);
+                                    animation.setAnimationListener(new Animation.AnimationListener() {
+                                        @Override
+                                        public void onAnimationStart(Animation animation) {
+
+                                        }
+
+                                        @Override
+                                        public void onAnimationEnd(Animation animation) {
+                                            if(button_test_1 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_1[buttonCount_1]);
+                                            }
+//                                            Log.e(TAG, "onAnimationEnd");
+                                        }
+
+                                        @Override
+                                        public void onAnimationRepeat(Animation animation) {
+
+                                        }
+                                    });
+                                    button_test_1[buttonCount_1].setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_1 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_1.leftToLeft = R.id.Button_1_training;
+                                    layoutParams_1.rightToRight = R.id.Button_1_training;
+                                    layoutParams_1.topToTop = R.id.Button_1_training;
+                                    layoutParams_1.bottomToBottom = R.id.Button_1_training;
+
+                                    constraintLayout.addView(button_test_1[buttonCount_1],-1,layoutParams_1);
+                                    button_1.bringToFront();
+                                    buttonCount_1++;
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackCanonData[trackCount] == 2)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_test_2[buttonCount_2] = new Button(getActivity());
+                                    button_test_2[buttonCount_2].setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translate_canon);
+                                    animation.setAnimationListener(new Animation.AnimationListener() {
+                                        @Override
+                                        public void onAnimationStart(Animation animation) {
+
+                                        }
+
+                                        @Override
+                                        public void onAnimationEnd(Animation animation) {
+                                            if(button_test_2 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_2[buttonCount_2]);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onAnimationRepeat(Animation animation) {
+
+                                        }
+                                    });
+                                    button_test_2[buttonCount_2].setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_2 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_2.leftToLeft = R.id.Button_2_training;
+                                    layoutParams_2.rightToRight = R.id.Button_2_training;
+                                    layoutParams_2.topToTop = R.id.Button_2_training;
+                                    layoutParams_2.bottomToBottom = R.id.Button_2_training;
+                                    constraintLayout.addView(button_test_2[buttonCount_2],-1,layoutParams_2);
+                                    button_2.bringToFront();
+                                    buttonCount_2++;
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackCanonData[trackCount] == 3)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_test_3[buttonCount_3] = new Button(getActivity());
+                                    button_test_3[buttonCount_3].setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translate_canon);
+                                    animation.setAnimationListener(new Animation.AnimationListener() {
+                                        @Override
+                                        public void onAnimationStart(Animation animation) {
+
+                                        }
+
+                                        @Override
+                                        public void onAnimationEnd(Animation animation) {
+                                            if(button_test_3 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_3[buttonCount_3]);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onAnimationRepeat(Animation animation) {
+
+                                        }
+                                    });
+                                    button_test_3[buttonCount_3].setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_3 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_3.leftToLeft = R.id.Button_3_training;
+                                    layoutParams_3.rightToRight = R.id.Button_3_training;
+                                    layoutParams_3.topToTop = R.id.Button_3_training;
+                                    layoutParams_3.bottomToBottom = R.id.Button_3_training;
+                                    constraintLayout.addView(button_test_3[buttonCount_3],-1,layoutParams_3);
+                                    button_3.bringToFront();
+                                    buttonCount_3++;
+                                }
+                            });
+                        }
+                    };
+                }
+                if (trackCanonData[trackCount] == 4)
+                {
+                    timerTask_training = new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    button_test_4[buttonCount_4] = new Button(getActivity());
+                                    button_test_4[buttonCount_4].setBackground(getResources().getDrawable(R.drawable.round_circle));
+                                    Animation animation = AnimationUtils.loadAnimation(getActivity(),R.anim.translate_canon);
+                                    animation.setAnimationListener(new Animation.AnimationListener() {
+                                        @Override
+                                        public void onAnimationStart(Animation animation) {
+
+                                        }
+
+                                        @Override
+                                        public void onAnimationEnd(Animation animation) {
+                                            if(button_test_4 != null)
+                                            {
+                                                constraintLayout.removeView(button_test_4[buttonCount_4]);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onAnimationRepeat(Animation animation) {
+
+                                        }
+                                    });
+                                    button_test_4[buttonCount_4].setAnimation(animation);
+
+                                    ConstraintLayout.LayoutParams layoutParams_4 = new ConstraintLayout.LayoutParams(dpToPx(106),dpToPx(106));
+                                    layoutParams_4.leftToLeft = R.id.Button_4_training;
+                                    layoutParams_4.rightToRight = R.id.Button_4_training;
+                                    layoutParams_4.topToTop = R.id.Button_4_training;
+                                    layoutParams_4.bottomToBottom = R.id.Button_4_training;
+                                    constraintLayout.addView(button_test_4[buttonCount_4],-1,layoutParams_4);
+                                    button_4.bringToFront();
+                                    buttonCount_4++;
+                                }
+                            });
+                        }
+                    };
+                }
+//            Log.e(TAG, "time\t" + trackEasyTime[trackCount]);
+                if(trackCount >= 4)
+                {
+                    timer_training.schedule(timerTask_training, trackCanonTime[trackCount]-3000);
                 }
             }
         }
@@ -1676,7 +2014,7 @@ public class Training extends android.app.Fragment {
                     timer_click.schedule(timerTask_button_3_activate,trackSunnyDayTime[trackSetCount]-500);
                     if(trackSetCount < trackSunnyDaySize-4)
                     {
-                        if(trackSunnyDayTime[trackSetCount]+500 < trackSunnyDayTime[trackSetCount+4]-500)
+                        if(trackSunnyDayTime[trackSetCount]+500 < trackSunnyDayTime[trackSetCount+1]-500)
                         {
                             timer_click.schedule(timerTask_button_3_deactivate,trackSunnyDayTime[trackSetCount]+500);
                         }
@@ -1715,9 +2053,174 @@ public class Training extends android.app.Fragment {
                     timer_click.schedule(timerTask_button_4_activate,trackSunnyDayTime[trackSetCount]-500);
                     if(trackSetCount < trackSunnyDaySize-4)
                     {
-                        if(trackSunnyDayTime[trackSetCount]+500 < trackSunnyDayTime[trackSetCount+4]-500)
+                        if(trackSunnyDayTime[trackSetCount]+500 < trackSunnyDayTime[trackSetCount+1]-500)
                         {
                             timer_click.schedule(timerTask_button_4_deactivate,trackSunnyDayTime[trackSetCount]+500);
+                        }
+                    }
+                }
+            }
+        }
+        else if(difficulty == 3)
+        {
+            for(trackSetCount=0;trackSetCount<trackCanonSize;trackSetCount++)
+            {
+                if (trackCanonData[trackSetCount] == 1)
+                {
+                    timerTask_button_1_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_1.setClickable(true);
+                            clickTiming_1 = 1;
+                        }
+                    };
+                    timerTask_button_1_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_1.setClickable(false);
+                            clickTiming_1 = 0;
+                        }
+                    };
+                    timerTask_button_1_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_1 = 2;
+                        }
+                    };
+                    timerTask_button_1_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_1 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_1_early,trackCanonTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_1_late,trackCanonTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_1_activate,trackCanonTime[trackSetCount]-500);
+
+                    if(trackSetCount < trackCanonSize-1)
+                    {
+                        if(trackCanonTime[trackSetCount]+500 < trackCanonTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_1_deactivate,trackCanonTime[trackSetCount]+500);
+                        }
+                    }
+                }
+                if (trackCanonData[trackSetCount] == 2)
+                {
+                    timerTask_button_2_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_2.setClickable(true);
+                            clickTiming_2 = 1;
+                        }
+                    };
+                    timerTask_button_2_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_2.setClickable(false);
+                            clickTiming_2 = 0;
+                        }
+                    };
+                    timerTask_button_2_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_2 = 2;
+                        }
+                    };
+                    timerTask_button_2_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_2 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_2_early,trackCanonTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_2_late,trackCanonTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_2_activate,trackCanonTime[trackSetCount]-500);
+
+                    if(trackSetCount < trackCanonSize-1)
+                    {
+                        if(trackCanonTime[trackSetCount]+500 < trackCanonTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_2_deactivate,trackCanonTime[trackSetCount]+500);
+                        }
+                    }
+                }
+                if (trackCanonData[trackSetCount] == 3)
+                {
+                    timerTask_button_3_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_3.setClickable(true);
+                            clickTiming_3 = 1;
+                        }
+                    };
+                    timerTask_button_3_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_3.setClickable(false);
+                            clickTiming_3 = 0;
+//                        Log.e(TAG, "setClickTime: deactivate");
+                        }
+                    };
+                    timerTask_button_3_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_3 = 2;
+                        }
+                    };
+                    timerTask_button_3_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_3 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_3_early,trackCanonTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_3_late,trackCanonTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_3_activate,trackCanonTime[trackSetCount]-500);
+                    if(trackSetCount < trackCanonSize-4)
+                    {
+                        if(trackCanonTime[trackSetCount]+500 < trackCanonTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_3_deactivate,trackCanonTime[trackSetCount]+500);
+                        }
+                    }
+                }
+                if (trackCanonData[trackSetCount] == 4)
+                {
+                    timerTask_button_4_activate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_4.setClickable(true);
+                            clickTiming_4 = 1;
+                        }
+                    };
+                    timerTask_button_4_deactivate = new TimerTask() {
+                        @Override
+                        public void run() {
+                            button_4.setClickable(false);
+                            clickTiming_4 = 0;
+                        }
+                    };
+                    timerTask_button_4_early = new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_4 = 2;
+                        }
+                    };
+                    timerTask_button_4_late =  new TimerTask() {
+                        @Override
+                        public void run() {
+                            clickTiming_4 = 3;
+                        }
+                    };
+                    timer_click.schedule(timerTask_button_4_early,trackCanonTime[trackSetCount]-10);
+                    timer_click.schedule(timerTask_button_4_late,trackCanonTime[trackSetCount]+110);
+                    timer_click.schedule(timerTask_button_4_activate,trackCanonTime[trackSetCount]-500);
+                    if(trackSetCount < trackCanonSize-4)
+                    {
+                        if(trackCanonTime[trackSetCount]+500 < trackCanonTime[trackSetCount+1]-500)
+                        {
+                            timer_click.schedule(timerTask_button_4_deactivate,trackCanonTime[trackSetCount]+500);
                         }
                     }
                 }
@@ -1745,42 +2248,12 @@ public class Training extends android.app.Fragment {
             button_test_4[i].clearAnimation();
             constraintLayout.removeView(button_test_4[i]);
         }
+        button_test_1 = null;
+        button_test_2 = null;
+        button_test_3 = null;
+        button_test_4 = null;
+
     }
-    private void createSunnyDay() {
-        ArrayList<Integer[]> arrayList_sunny_day = new ArrayList<Integer[]>();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(this.getActivity().getAssets().open("sunnyday.txt")));
-
-            String mLine = reader.readLine();
-            while(mLine != null)
-            {
-                String temp[] = mLine.split("\t");
-//                Log.e(TAG, "mLine = \t" + Integer.valueOf(temp[0]) + "\t" + Integer.valueOf(temp[1]));
-                Integer temp_int_array_1[] = new Integer[2];
-                temp_int_array_1[0] = 1000*(Integer.valueOf(temp[1]))*60/(68*2);
-//                Log.e(TAG, "Time = \t" + temp_int_array_1[0]);
-                temp_int_array_1[1] = Integer.valueOf(temp[0]);
-                arrayList_sunny_day.add(temp_int_array_1);
-                mLine = reader.readLine();
-
-            }
-            String temp[][] = new String[2][arrayList_sunny_day.size()];
-            for(int i = 0; i< arrayList_sunny_day.size(); i++)
-            {
-                temp[0][i] = arrayList_sunny_day.get(i)[0].toString();
-                temp[1][i] = arrayList_sunny_day.get(i)[1].toString();
-            }
-            dataBase_training.addSong(temp,"Sunny day");
-
-
-//            Log.e(TAG, "Array Length = \t" + arrayList_sunny_day.size());
-
-        } catch (IOException e) {
-            Log.e(TAG, "Open Fail");
-            e.printStackTrace();
-        }
-    }
-
 
 
     @Override
@@ -1788,7 +2261,6 @@ public class Training extends android.app.Fragment {
         super.onCreate(savedInstanceState);
 
         dataBase_training = new DataBase(getActivity(),"Database Record",null, 1);
-        createSunnyDay();
 
         handler_example = new Handler();
         handler_countdown = new Handler();
@@ -1823,6 +2295,10 @@ public class Training extends android.app.Fragment {
         trackSunnyDaySize = dataBase_training.getSongData(2).length;
         trackSunnyDayData = dataBase_training.getSongData(2);
         trackSunnyDayTime = dataBase_training.getSongTime(2);
+
+        trackCanonSize = dataBase_training.getSongData(3).length;
+        trackCanonData = dataBase_training.getSongData(3);
+        trackCanonTime = dataBase_training.getSongTime(3);
 
 
         drum_track = new int[4][5];
@@ -1915,7 +2391,10 @@ public class Training extends android.app.Fragment {
                     {
                         timer_countdown.schedule(timerTask_countdown,0,1000*60/68/2);
                     }
-
+                    else if(difficulty == 3)
+                    {
+                        timer_countdown.schedule(timerTask_countdown,0,1000*60/80);
+                    }
                     timer_click = new Timer();
 
                     mediaPlayer_track.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -2180,6 +2659,12 @@ public class Training extends android.app.Fragment {
                                     button_set_difficulty.setText(R.string.sunnyday);
                                     mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.sunnyday);
                                     mediaPlayer_track = MediaPlayer.create(getActivity(),R.raw.sunnyday_nodrum);
+                                }
+                                else if(which == 3)
+                                {
+                                    button_set_difficulty.setText(R.string.canon);
+                                    mediaPlayer_example = MediaPlayer.create(getActivity(),R.raw.canon);
+                                    mediaPlayer_track = MediaPlayer.create(getActivity(),R.raw.canon_nodrum);
                                 }
                                 Log.e(TAG, "Difficulty = \t" + difficulty);
                             }

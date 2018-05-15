@@ -35,7 +35,75 @@ public class MainActivity extends AppCompatActivity {
 
     private DataBase dataBase;
 
+    private void createSunnyDay() {
+        ArrayList<Integer[]> arrayList_sunny_day = new ArrayList<Integer[]>();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(this.getAssets().open("sunnyday.txt")));
 
+            String mLine = reader.readLine();
+            while(mLine != null)
+            {
+                String temp[] = mLine.split("\t");
+//                Log.e(TAG, "mLine = \t" + Integer.valueOf(temp[0]) + "\t" + Integer.valueOf(temp[1]));
+                Integer temp_int_array_1[] = new Integer[2];
+                temp_int_array_1[0] = 1000*(Integer.valueOf(temp[1]))*60/(68*2);
+//                Log.e(TAG, "Time = \t" + temp_int_array_1[0]);
+                temp_int_array_1[1] = Integer.valueOf(temp[0]);
+                arrayList_sunny_day.add(temp_int_array_1);
+                mLine = reader.readLine();
+
+            }
+            String temp[][] = new String[2][arrayList_sunny_day.size()];
+            for(int i = 0; i< arrayList_sunny_day.size(); i++)
+            {
+                temp[0][i] = arrayList_sunny_day.get(i)[0].toString();
+                temp[1][i] = arrayList_sunny_day.get(i)[1].toString();
+            }
+            dataBase.addSong(temp,"Sunny day");
+
+
+//            Log.e(TAG, "Array Length = \t" + arrayList_sunny_day.size());
+
+        } catch (IOException e) {
+            Log.e(TAG, "Open Fail");
+            e.printStackTrace();
+        }
+    }
+
+    private void createCanon() {
+        ArrayList<Integer[]> arrayList_canon = new ArrayList<Integer[]>();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(this.getAssets().open("canon.txt")));
+
+            String mLine = reader.readLine();
+            while(mLine != null)
+            {
+                String temp[] = mLine.split("\t");
+//                Log.e(TAG, "mLine = \t" + Integer.valueOf(temp[0]) + "\t" + Integer.valueOf(temp[1]));
+                Integer temp_int_array_1[] = new Integer[2];
+                temp_int_array_1[0] = 1000*(Integer.valueOf(temp[1]))*60/80;
+//                Log.e(TAG, "Time = \t" + temp_int_array_1[0]);
+                temp_int_array_1[1] = Integer.valueOf(temp[0]);
+                arrayList_canon.add(temp_int_array_1);
+                mLine = reader.readLine();
+
+            }
+            String temp[][] = new String[2][arrayList_canon.size()];
+            for(int i = 0; i< arrayList_canon.size(); i++)
+            {
+                temp[0][i] = arrayList_canon.get(i)[0].toString();
+                temp[1][i] = arrayList_canon.get(i)[1].toString();
+            }
+            dataBase.addSong(temp,"Canon");
+
+
+//            Log.e(TAG, "Array Length = \t" + arrayList_sunny_day.size());
+
+        } catch (IOException e) {
+            Log.e(TAG, "Open Fail");
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -44,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dataBase = new DataBase(this,"Database Record",null, 1);
-
+        dataBase.deleteTableSong();
 
         AddSong createSong = new AddSong();
         String temp[][] = createSong.getEasyExampleSong();
@@ -52,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
         temp = createSong.getNormalExampleSong();
         dataBase.addSong(temp,"Example Song: Normal");
+
+        createSunnyDay();
+        createCanon();
 
 
         FragmentTransaction mf = getFragmentManager().beginTransaction();

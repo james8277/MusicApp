@@ -187,9 +187,9 @@ public class DataBase extends SQLiteOpenHelper {
 
     public void addSong(String[][] song_track, String song_name)
     {
-        if(getSongNumber() != 3)
+        if(getSongNumber() != 4)
         {
-            Log.e(TAG, "addSong: song" + song_name);
+            Log.e(TAG, "addSong: song\t" + song_name);
             SQLiteDatabase database = this.getWritableDatabase();
             SQLiteDatabase database_read = this.getReadableDatabase();
             ContentValues cv = new ContentValues();
@@ -288,6 +288,12 @@ public class DataBase extends SQLiteOpenHelper {
             return 0;
         }
 
+    }
+    public void deleteTableSong()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Log.w("db_delete_db_all","delete");
+        db.delete(TABLE_SONG, null, null);
     }
 
 
