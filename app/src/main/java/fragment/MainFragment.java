@@ -1,5 +1,6 @@
 package fragment;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.media.SoundPool;
@@ -29,8 +30,7 @@ public class MainFragment extends android.app.Fragment {
     private Button button_3;
     private Button button_4;
     private Button Button_metronome;
-    private Button button_training;
-    private Button button_record;
+    private Button button_back;
 
     private EditText editText_rate;
 
@@ -83,9 +83,8 @@ public class MainFragment extends android.app.Fragment {
         button_2 = (Button)view.findViewById(R.id.Button_2);
         button_3 = (Button)view.findViewById(R.id.Button_3);
         button_4 = (Button)view.findViewById(R.id.Button_4);
-        button_training = (Button)view.findViewById(R.id.Button_training_mode);
-        button_record = (Button)view.findViewById(R.id.Button_record_mode);
         Button_metronome = (Button)view.findViewById(R.id.Button_metronome);
+        button_back = (Button)view.findViewById(R.id.Button_main_back);
 
         editText_rate = (EditText)view.findViewById(R.id.EditText_metronome_tempo);
 
@@ -190,27 +189,16 @@ public class MainFragment extends android.app.Fragment {
             }
         });
 
-        button_training.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: training");
-                FragmentTransaction mf = getFragmentManager().beginTransaction();
-                android.app.Fragment fragment_training = new Training();
-                mf.replace(R.id.container_main,fragment_training);
-                mf.commit();
-            }
-        });
-        button_record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: record");
-                FragmentTransaction mf = getFragmentManager().beginTransaction();
-                android.app.Fragment fragment_record = new Record();
-                mf.replace(R.id.container_main,fragment_record);
-                mf.commit();
-            }
-        });
 
+        button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "onClick: Main back");
+                FragmentManager manager = getFragmentManager();
+                manager.popBackStack();
+
+            }
+        });
 
         return view;
     }

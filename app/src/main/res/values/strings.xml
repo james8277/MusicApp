@@ -28,4 +28,7 @@
     <string name="normal">Normal</string>
     <string name="sunnyday">Sunny Day</string>
     <string name="canon">Canon</string>
+    <string name="welcome">Welcome</string>
+    <string name="freeMode">Free Mode</string>
+    <string name="exit">Exit?</string>
 </resources>

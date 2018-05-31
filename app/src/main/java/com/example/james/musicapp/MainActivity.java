@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import fragment.MainFragment;
 import fragment.Training;
+import fragment.Welcome;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         FragmentTransaction mf = getFragmentManager().beginTransaction();
-        Fragment fragment_start = new MainFragment();
+        Fragment fragment_start = new Welcome();
         mf.replace(R.id.container_main,fragment_start);
         mf.commit();
     }

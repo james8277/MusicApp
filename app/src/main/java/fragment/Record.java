@@ -2,6 +2,7 @@ package fragment;
 
 import android.animation.Animator;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -213,10 +214,9 @@ public class Record extends android.app.Fragment {
         button_back_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction mf = getFragmentManager().beginTransaction();
-                android.app.Fragment fragment_main = new MainFragment();
-                mf.replace(R.id.container_main,fragment_main);
-                mf.commit();
+                Log.e(TAG, "onClick: Main back");
+                FragmentManager manager = getFragmentManager();
+                manager.popBackStack();
             }
         });
 

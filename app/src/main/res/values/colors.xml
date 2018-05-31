@@ -7,5 +7,6 @@
     <color name="gery">#a9a9a9</color>
     <color name="color_early">#fa6800</color>
     <color name="color_late">#54f23f</color>
+    <color name="black">#000000</color>
 
 </resources>

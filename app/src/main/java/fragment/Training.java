@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
@@ -2678,10 +2679,9 @@ public class Training extends android.app.Fragment {
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction mf = getFragmentManager().beginTransaction();
-                Fragment fragment_main = new MainFragment();
-                mf.replace(R.id.container_main,fragment_main);
-                mf.commit();
+                Log.e(TAG, "onClick: Main back");
+                FragmentManager manager = getFragmentManager();
+                manager.popBackStack();
             }
         });
 
